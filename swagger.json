@@ -5,7 +5,7 @@
     "description": "Test Journal API",
     "version": "1.0.0"
   },
-  "host": "yazzie-journal-api.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": ["http"],
   "paths": {
