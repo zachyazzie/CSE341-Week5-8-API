@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Journal API",
+    "description": "Test Journal API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:10000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/users/{postId}": {
+      "get": {
+        "description": "Gets single user by postId",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "description": "Retrieves all users in db.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new user/notes in db.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "Luke"
+                },
+                "lastName": {
+                  "example": "Skywalker"
+                },
+                "email": {
+                  "example": "farmboy@tatooine.com"
+                },
+                "phone": {
+                  "example": "555-123-1971"
+                },
+                "notes": {
+                  "example": [
+                    {
+                      "date": "10-12-2022",
+                      "location": "Provo, UT",
+                      "image": "URL here",
+                      "entry": "Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nam vestibul…",
+                      "tags": ["work", "fun", "family"]
+                    },
+                    {
+                      "date": "10-12-2022",
+                      "location": "Provo, UT",
+                      "image": "URL here",
+                      "entry": "Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nam vestibul…",
+                      "tags": ["work", "fun", "family"]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/logins/{username}": {
+      "get": {
+        "description": "Gets login information by username.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/logins/": {
+      "get": {
+        "description": "Gets all login information.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates new login.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "askywalker"
+                },
+                "password": {
+                  "example": "anakin@skywalker.net"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
