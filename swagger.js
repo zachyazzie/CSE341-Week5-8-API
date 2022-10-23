@@ -5,8 +5,8 @@ const doc = {
     title: 'Journal API',
     description: 'Test Journal API',
   },
-  host: 'localhost:10000',
-  schemes: ['http'],
+  host: 'yazzie-journal-api.onrender.com',
+  schemes: ['https'],
 };
 
 const outputFile = './swagger.json';

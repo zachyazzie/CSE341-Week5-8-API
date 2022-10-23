@@ -5,13 +5,164 @@
     "description": "Test Journal API",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "yazzie-journal-api.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "paths": {
+    "/users/": {
+      "get": {
+        "description": "Get all users in DB",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "description": "Create new user in DB",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "Han"
+                },
+                "lastName": {
+                  "example": "Solo"
+                },
+                "email": {
+                  "example": "NerfHerder@Corellia.com"
+                },
+                "phone": {
+                  "example": "888-555-5555"
+                },
+                "notes": {
+                  "example": [
+                    {
+                      "date": "10-10-2022"
+                    },
+                    {
+                      "location": "Provo, UT"
+                    },
+                    {
+                      "image": "Image URL"
+                    },
+                    {
+                      "entry": "Paragraph(s) go here..."
+                    },
+                    {
+                      "tags": ["fun", "party", "chill"]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/users/{postId}": {
       "get": {
-        "description": "Gets single user by postId",
+        "description": "Get one user from DB",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "Edit one user in DB",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "Emperor"
+                },
+                "lastName": {
+                  "example": "Palpatine"
+                },
+                "email": {
+                  "example": "Sith4lyfe@sith.com"
+                },
+                "phone": {
+                  "example": "888-555-5555"
+                },
+                "notes": {
+                  "example": [
+                    {
+                      "date": "10-10-2022"
+                    },
+                    {
+                      "location": "Provo, UT"
+                    },
+                    {
+                      "image": "Image URL"
+                    },
+                    {
+                      "entry": "Paragraph(s) go here..."
+                    },
+                    {
+                      "tags": ["fun", "party", "chill"]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete one user from DB",
         "parameters": [
           {
             "name": "postId",
@@ -30,9 +181,9 @@
         }
       }
     },
-    "/users/": {
+    "/logins/": {
       "get": {
-        "description": "Retrieves all users in db.",
+        "description": "Get all logins from DB",
         "parameters": [],
         "responses": {
           "200": {
@@ -44,7 +195,7 @@
         }
       },
       "post": {
-        "description": "Creates a new user/notes in db.",
+        "description": "Create new login in DB",
         "parameters": [
           {
             "name": "body",
@@ -52,35 +203,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "Luke"
+                "username": {
+                  "example": "GeneralOrgana"
                 },
-                "lastName": {
-                  "example": "Skywalker"
-                },
-                "email": {
-                  "example": "farmboy@tatooine.com"
-                },
-                "phone": {
-                  "example": "555-123-1971"
-                },
-                "notes": {
-                  "example": [
-                    {
-                      "date": "10-12-2022",
-                      "location": "Provo, UT",
-                      "image": "URL here",
-                      "entry": "Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nam vestibul…",
-                      "tags": ["work", "fun", "family"]
-                    },
-                    {
-                      "date": "10-12-2022",
-                      "location": "Provo, UT",
-                      "image": "URL here",
-                      "entry": "Lorem ipsum dolor sit amet,  consectetur adipiscing elit. Nam vestibul…",
-                      "tags": ["work", "fun", "family"]
-                    }
-                  ]
+                "password": {
+                  "example": "CoolCloneWarDad"
                 }
               }
             }
@@ -90,18 +217,21 @@
           "201": {
             "description": "Created"
           },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/logins/{username}": {
+    "/logins/{postId}": {
       "get": {
-        "description": "Gets login information by username.",
+        "description": "Get one login from DB",
         "parameters": [
           {
-            "name": "username",
+            "name": "postId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -115,24 +245,16 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/logins/": {
-      "get": {
-        "description": "Gets all login information.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
       },
-      "post": {
-        "description": "Creates new login.",
+      "put": {
+        "description": "Edit one login in DB",
         "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -140,18 +262,42 @@
               "type": "object",
               "properties": {
                 "username": {
-                  "example": "askywalker"
+                  "example": "PapaYoda"
                 },
                 "password": {
-                  "example": "anakin@skywalker.net"
+                  "example": "AmIGrogusDad?"
                 }
               }
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "204": {
+            "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/logins/{username}": {
+      "delete": {
+        "description": "Delete one login from DB",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"

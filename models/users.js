@@ -32,7 +32,7 @@ const PostSchema = mongoose.Schema({
     entry: {
       type: [String],
     },
-    Tags: {
+    tags: {
       type: [mongoose.SchemaTypes.Mixed],
     },
   },

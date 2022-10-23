@@ -10,7 +10,7 @@ routes.use(
   '/',
   (docData = (req, res) => {
     let docData = {
-      documentationURL: 'https://localhost:8080/api-docs',
+      documentationURL: 'https://yazzie-journal-api.onrender.com/api-docs',
     };
     res.send(docData);
   })

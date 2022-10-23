@@ -15,6 +15,14 @@ app
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
   .use('/', require('./routes'));
+
+process.on('uncaughtException', (err, origin) => {
+  console.log(
+    process.stderr.fd,
+    `caught exception: :{err}\n` + `Exception origin: ${origin}`
+  );
+});
+
 //Connect to DB
 
 mongoose

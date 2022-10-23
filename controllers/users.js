@@ -1,26 +1,26 @@
 const userSchema = require('../models/users');
 
-//GETS ALL POSTS
+//GETS ALL USER
 async function getAllUsers(req, res) {
   try {
     const posts = await userSchema.find();
     res.status(200).json(posts);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(400).json({ message: err });
   }
 }
 
-//GETS A SPECIFIC POST
+//GETS A SPECIFIC USER
 async function getOneUser(req, res) {
   try {
     const post = await userSchema.findById(req.params.postId);
     res.status(200).json(post);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(400).json({ message: err });
   }
 }
 
-//SUBMITS A POST
+//CREATES A USER
 async function createUser(req, res) {
   try {
     const post = new userSchema({
@@ -37,8 +37,8 @@ async function createUser(req, res) {
   }
 }
 
-//UPDATE A POST
-async function updateContact(req, res) {
+//UPDATE A USER
+async function updateUser(req, res) {
   try {
     const updatedPost = await userSchema.findByIdAndUpdate(
       req.params.postId,
@@ -50,8 +50,8 @@ async function updateContact(req, res) {
   }
 }
 
-//DELETE A POST
-async function deleteContact(req, res) {
+//DELETE A USER
+async function deleteUser(req, res) {
   try {
     const removedPost = await userSchema.deleteOne({ _id: req.params.postId });
     res.status(200).json(removedPost);
@@ -64,6 +64,6 @@ module.exports = {
   getAllUsers,
   getOneUser,
   createUser,
-  updateContact,
-  deleteContact,
+  updateUser,
+  deleteUser,
 };
