@@ -26,7 +26,7 @@ process.on('uncaughtException', (err, origin) => {
 //Connect to DB
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.DB_CONNECTION_STRING)
 
   .then(() => {
     app.listen(port);
