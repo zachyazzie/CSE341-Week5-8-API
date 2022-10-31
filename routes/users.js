@@ -4,7 +4,7 @@ const router = express.Router();
 const usersController = require('../controllers/users');
 const validation = require('../middleware/validate');
 
-router.get('/', usersController.getAllUsers);
+router.get('/all', usersController.getAllUsers);
 
 router.get('/:postId', usersController.getOneUser);
 

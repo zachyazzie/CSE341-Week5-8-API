@@ -4,7 +4,7 @@ const router = express.Router();
 const loginsController = require('../controllers/logins');
 const validation = require('../middleware/validate');
 
-router.get('/', loginsController.getAllLogins);
+router.get('/all', loginsController.getAllLogins);
 
 router.get('/:postId', loginsController.getOneLogin);
 
