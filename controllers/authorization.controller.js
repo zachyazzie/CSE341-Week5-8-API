@@ -1,5 +1,5 @@
-const app = require('../config/app');
 const appConfig = require('../config/app');
+const axios = require('axios');
 
 const AuthorizationController = {
   login: (req, res) => {
@@ -9,7 +9,7 @@ const AuthorizationController = {
       appConfig.clientID
     }&redirect_uri=${encodeURIComponent(
       appConfig.redirectURL
-    )}&state=1234&scope=openid%20profile%20email.com`;
+    )}&scope=openid%20profile%20email`;
     res.redirect(authorizationURL);
   },
 
@@ -29,9 +29,9 @@ const AuthorizationController = {
       }),
     });
 
-    const jsonResponse = await response.json();
+    const json = await response.json();
 
-    res.json(jsonResponse);
+    res.json(json);
   },
 };
 module.exports = AuthorizationController;
