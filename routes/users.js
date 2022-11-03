@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const NotesController = require('../controllers/notes');
 const usersController = require('../controllers/users');
 const validation = require('../middleware/validate');
 const loadUser = require('../middleware/loadUser');
 
 router.use([loadUser]);
+
+router.get('/', NotesController.index);
 
 router.get('/all', usersController.getAllUsers);
 
