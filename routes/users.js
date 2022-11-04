@@ -8,8 +8,6 @@ const loadUser = require('../middleware/loadUser');
 
 router.use([loadUser]);
 
-router.get('/', NotesController.index);
-
 router.get('/all', usersController.getAllUsers);
 
 router.get('/:postId', usersController.getOneUser);

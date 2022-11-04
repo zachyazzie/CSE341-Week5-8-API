@@ -28,8 +28,8 @@ async function createUser(req, res) {
       lastName: req.body.lastName,
       email: req.body.email,
       phone: req.body.phone,
-      notes: req.body.notes,
     });
+    console.log(post);
     const savedPost = await post.save();
     res.status(201).json(savedPost);
   } catch (err) {
