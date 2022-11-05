@@ -7,6 +7,12 @@ const doc = {
   },
   host: 'yazzie-journal-api.onrender.com',
   schemes: ['https'],
+  components:
+  securitySchemes:
+
+    BearerAuth:
+      type: http
+      scheme: bearer
 };
 
 const outputFile = './swagger.json';

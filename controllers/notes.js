@@ -3,6 +3,7 @@ const { update } = require('../models/user');
 
 //GETS ALL NOTES FROM ONE USER
 async function getAllUserNotes(req, res) {
+  console.log(req.user);
   try {
     const notes = await notesSchema.find();
     let userNotes = [];
@@ -71,10 +72,6 @@ async function editNote(req, res) {
         }
       );
       res.status(204).json(updatedPost);
-    } else {
-      res
-        .status(401)
-        .json({ message: 'User not authorized to edit this note.' });
     }
   } catch (err) {
     res.status(500).json({ message: err });

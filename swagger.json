@@ -2,28 +2,106 @@
   "swagger": "2.0",
   "info": {
     "title": "Journal API",
-    "description": "Test Journal API",
+    "description": "A majority of these routes require an identifier from a user to be authorized.",
     "version": "1.0.0"
   },
   "host": "yazzie-journal-api.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "x-auth-token",
+      "scheme": "bearer",
+      "in": "header",
+      "description": "The token for authentication"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
   "paths": {
     "/users/": {
       "get": {
-        "description": "Get all users in DB",
+        "description": "Gets info for one user.",
+        "parameters": [],
+
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/delete/{postId}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/notes/all": {
+      "get": {
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/notes/one": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/notes/create": {
       "post": {
-        "description": "Create new user in DB",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -31,36 +109,23 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "Han"
+                "entry": {
+                  "example": "any"
                 },
-                "lastName": {
-                  "example": "Solo"
+                "date": {
+                  "example": "any"
                 },
-                "email": {
-                  "example": "NerfHerder@Corellia.com"
+                "location": {
+                  "example": "any"
                 },
-                "phone": {
-                  "example": "888-555-5555"
+                "image": {
+                  "example": "any"
                 },
-                "notes": {
-                  "example": [
-                    {
-                      "date": "10-10-2022"
-                    },
-                    {
-                      "location": "Provo, UT"
-                    },
-                    {
-                      "image": "Image URL"
-                    },
-                    {
-                      "entry": "Paragraph(s) go here..."
-                    },
-                    {
-                      "tags": ["fun", "party", "chill"]
-                    }
-                  ]
+                "mood": {
+                  "example": "any"
+                },
+                "tags": {
+                  "example": "any"
                 }
               }
             }
@@ -79,28 +144,9 @@
         }
       }
     },
-    "/users/{postId}": {
-      "get": {
-        "description": "Get one user from DB",
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
+    "/notes/edit/{postId}": {
       "put": {
-        "description": "Edit one user in DB",
+        "description": "",
         "parameters": [
           {
             "name": "postId",
@@ -114,36 +160,23 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "Emperor"
+                "entry": {
+                  "example": "any"
                 },
-                "lastName": {
-                  "example": "Palpatine"
+                "date": {
+                  "example": "any"
                 },
-                "email": {
-                  "example": "Sith4lyfe@sith.com"
+                "location": {
+                  "example": "any"
                 },
-                "phone": {
-                  "example": "888-555-5555"
+                "image": {
+                  "example": "any"
                 },
-                "notes": {
-                  "example": [
-                    {
-                      "date": "10-10-2022"
-                    },
-                    {
-                      "location": "Provo, UT"
-                    },
-                    {
-                      "image": "Image URL"
-                    },
-                    {
-                      "entry": "Paragraph(s) go here..."
-                    },
-                    {
-                      "tags": ["fun", "party", "chill"]
-                    }
-                  ]
+                "mood": {
+                  "example": "any"
+                },
+                "tags": {
+                  "example": "any"
                 }
               }
             }
@@ -153,6 +186,9 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "412": {
             "description": "Precondition Failed"
           },
@@ -160,9 +196,11 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/notes/delete/{postId}": {
       "delete": {
-        "description": "Delete one user from DB",
+        "description": "",
         "parameters": [
           {
             "name": "postId",
@@ -175,132 +213,35 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/logins/": {
+    "/authorization/login": {
       "get": {
-        "description": "Get all logins from DB",
+        "description": "",
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "description": "Create new login in DB",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "GeneralOrgana"
-                },
-                "password": {
-                  "example": "CoolCloneWarDad"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+        "responses": {}
       }
     },
-    "/logins/{postId}": {
+    "/authorization/callback": {
       "get": {
-        "description": "Get one login from DB",
+        "description": "",
         "parameters": [
           {
-            "name": "postId",
-            "in": "path",
-            "required": true,
+            "name": "code",
+            "in": "query",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "description": "Edit one login in DB",
-        "parameters": [
-          {
-            "name": "postId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "PapaYoda"
-                },
-                "password": {
-                  "example": "AmIGrogusDad?"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/logins/{username}": {
-      "delete": {
-        "description": "Delete one login from DB",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }

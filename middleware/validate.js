@@ -2,11 +2,12 @@ const validator = require('../helpers/validate');
 
 const user = async (req, res, next) => {
   const validationRule = {
-    firstName: 'required|string',
-    lastName: 'required|string',
-    email: 'required|email',
-    phone: 'required|string',
-    notes: 'array',
+    identifier: 'string',
+    email: 'required|string',
+    givenName: 'required|string',
+    familyName: 'required|string',
+    locale: 'required|string',
+    picture: 'string',
   };
 
   validator(req.body, validationRule, {}, (err, status) => {
@@ -23,10 +24,15 @@ const user = async (req, res, next) => {
   }).catch((err) => console.log('broken'));
 };
 
-const login = async (req, res, next) => {
+const note = async (req, res, next) => {
   const validationRule = {
-    username: 'required|string',
-    password: 'required|string|min:6',
+    identifier: 'string',
+    entry: 'required|string',
+    date: 'required|string',
+    location: 'required|string',
+    image: 'required|string',
+    mood: 'required|string',
+    tags: 'required|string',
   };
 
   validator(req.body, validationRule, {}, (err, status) => {
@@ -45,5 +51,5 @@ const login = async (req, res, next) => {
 
 module.exports = {
   user,
-  login,
+  note,
 };

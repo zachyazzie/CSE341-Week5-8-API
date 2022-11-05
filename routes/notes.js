@@ -11,9 +11,9 @@ router.get('/all', notesController.getAllUserNotes);
 
 router.get('/one', notesController.getNewestUserNote);
 
-router.post('/create', notesController.createNote);
+router.post('/create', validation.note, notesController.createNote);
 
-router.put('/edit/:postId', notesController.editNote);
+router.put('/edit/:postId', validation.note, notesController.editNote);
 
 router.delete('/delete/:postId', notesController.deleteNote);
 
