@@ -9,6 +9,12 @@ router.use([loadUser]);
 
 router.get('/all', notesController.getAllUserNotes);
 
-router.post('/', notesController.createNote);
+router.get('/one', notesController.getNewestUserNote);
+
+router.post('/create', notesController.createNote);
+
+router.put('/edit/:postId', notesController.editNote);
+
+router.delete('/delete/:postId', notesController.deleteNote);
 
 module.exports = router;
